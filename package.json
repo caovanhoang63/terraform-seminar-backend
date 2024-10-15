@@ -8,6 +8,8 @@
   },
   "private": true,
   "dependencies": {
-    "express": "^4.21.1"
+    "cors": "^2.8.5",
+    "express": "^4.21.1",
+    "mysql2": "^3.11.3"
   }
 }
