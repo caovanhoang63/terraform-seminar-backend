@@ -22,15 +22,24 @@ app.get('/', (req, res) => {
 });
 
 app.get('/products', (req, res) => {
-    pool.query('SELECT * FROM product', (err, rows, fields) => {
+    res.send([
+        {name: "carrot",price: "10",unit:"kg"},
+        {name: "chili",price: "11",unit:"kg"},
+        {name: "mango",price: "2",unit:"kg"}
+    ]);
+});
+
+app.get('/db-check', (req, res) => {
+    pool.query('SELECT 1 + 1 AS solution', (err, rows, fields) => {
         if (err) {
             console.error('Error querying the database:', err);
-            res.status(500).send('An error occurred while fetching products');
-            return;
+            res.status(500).send('An error occurred while fetching database');
         }
-        res.send(rows);
-    });
-});
+
+        console.log('The solution is: ', rows[0].solution)
+        res.send("connect database success")
+    })
+})
 
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`);
